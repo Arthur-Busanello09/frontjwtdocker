@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login';
+import { User } from 'src/app/models/user';
+import { Usuario } from 'src/app/models/usuario';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -10,40 +12,34 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent {
 
-  login: Login = new Login();
+  usuario: Usuario = new Usuario();
   roteador = inject(Router);
+  login: Login = new Login();
   loginService = inject(LoginService);
+  user = new User();
 
   constructor() {
-    this.loginService.removerToken();
+    this.loginService.removerToken;
   }
 
   logar() {
 
+    //implementar a requisição aqui e colocar o token no localstorage
 
     this.loginService.logar(this.login).subscribe({
       next: user => { // QUANDO DÁ CERTO
-        console.log(user);
+        this.user = user;
+
         this.loginService.addToken(user.token);
         this.roteador.navigate(['admin/produtos']);
       },
       error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        alert('login ou senha incorretos');
         console.error(erro);
       }
     });
 
 
-
-
-    //implementar a requisição aqui e colocar o token no localstorage
-
-    if (this.login.username == 'admin' && this.login.password == 'admin')
-      this.roteador.navigate(['admin/produtos']);
-    else
-      alert('login ou senha incorretos');
-
   }
-
 
 }

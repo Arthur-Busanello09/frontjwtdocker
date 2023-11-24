@@ -5,6 +5,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/models/user';
+import { Login } from 'src/app/models/login';
+import { Usuario } from 'src/app/models/usuario';
+import { By } from '@angular/platform-browser';
 
 class MockLoginService {
   logar(login: any) {
@@ -38,6 +42,15 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
+
+  beforeEach(() => {
+    let usuario = new Usuario();
+    usuario.login = 'admin';
+    usuario.senha = 'admin';
+    component.usuario = usuario;
+    fixture.detectChanges();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -49,12 +62,26 @@ describe('LoginComponent', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/admin/produtos']);
   }));
 
-  it('should show an alert on login failure', fakeAsync(() => {
+  it('should show an alert on invalid credentials', fakeAsync(() => {
     spyOn(window, 'alert');
-    component.login = { username: 'nao', password: 'blahblah' };
+    component.login = { username: 'invalidUser', password: 'invalidPassword' };
     component.logar();
     tick(); 
     expect(window.alert).toHaveBeenCalledWith('Login ou senha incorretos');
   }));
 
+  it('Teste de 1 @Input -  template', () => {
+    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
+    expect(elemento.nativeElement.ngModel).toEqual('admin');
+  });
+  it('Teste de 1 @Input - template pra senha', () => {
+    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputPassword1"]'));
+    expect(elemento.nativeElement.ngModel).toEqual('admin');
+  })
+
+  it('Teste 2 de @Input - template', () => {
+    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
+    expect(elemento.nativeElement.ngModel).not.toBe(null);
+  });
+  
 });

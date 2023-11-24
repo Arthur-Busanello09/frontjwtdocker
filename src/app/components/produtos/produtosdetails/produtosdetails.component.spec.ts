@@ -25,7 +25,7 @@ describe('ProdutosdetailsComponent', () => {
     fixture.detectChanges();
   });
 
-
+  
   beforeEach(() => { //MOCANDO DADOS
     let produto = new Produto();
     produto.id = 1;
@@ -35,24 +35,21 @@ describe('ProdutosdetailsComponent', () => {
     fixture.detectChanges(); //refresh
   });
 
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 
   it('Teste de 1 @Input - Interpolação no template', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
     expect(elemento.nativeElement.ngModel).toEqual('Pizza');
   });
 
-
   it('Teste 2 de @Input - Interpolação no template', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
     expect(elemento.nativeElement.ngModel).not.toBe(null);
   });
 
-
+  
   beforeEach(() => { //MOCANDO DADOS
     let produto = new Produto();
     produto.id = 1;
@@ -76,9 +73,5 @@ describe('ProdutosdetailsComponent', () => {
   }));
 
 
-
 });
-
-
-
 
