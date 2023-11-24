@@ -15,4 +15,7 @@ describe('rotaguardGuard', () => {
     expect(executeGuard).toBeTruthy();
   });
 
+  it('should be created', () => {
+    expect(executeGuard).not.toBe(null);
+  })
 });

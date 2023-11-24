@@ -83,5 +83,9 @@ describe('LoginComponent', () => {
     let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
     expect(elemento.nativeElement.ngModel).not.toBe(null);
   });
+  it('Teste de 2 @Input - template pra senha', () => {
+    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputPassword1"]'));
+    expect(elemento.nativeElement.ngModel).not.toBe(null);
+  })
   
 });
